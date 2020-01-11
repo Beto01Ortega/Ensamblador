@@ -16,19 +16,19 @@
 %endmacro
 
 section .data
-        mensaje1 db 10,"Ingresar valor",10
+        mensaje1 db 10,"Ingresar un valor por número",10
         len1 equ $ - mensaje1
 
-        mensaje2 db 10, "#1", 10
+        mensaje2 db 10, "Número 1", 10
         len2 equ $ - mensaje2
 
-        mensaje3 db 10,"#2",10
+        mensaje3 db 10,"Número 2",10
         len3 equ $ - mensaje3
 
-        mensaje4 db 10,"#3",10
+        mensaje4 db 10,"Número 3",10
         len4 equ $ - mensaje4
 
-        mensajef db 10,"El mayor es el número:",10
+        mensajef db 10,"El mayor es el:"
         lenf equ $ - mensajef
 
         mensajeI db 10,"Los números son iguales",10
