@@ -15,6 +15,14 @@
         int 80h
 %endmacro
 
+%macro escribirn 1
+        mov eax, 4
+        mov ebx, 1
+        mov ecx, %1
+        mov edx, 1
+        int 80h
+%endmacro
+
 section .data
         mensaje1 db 10,"Ingresar un valor por número",10
         len1 equ $ - mensaje1
@@ -28,15 +36,21 @@ section .data
         mensaje4 db 10,"Número 3",10
         len4 equ $ - mensaje4
 
-        mensajef db 10,"El mayor es el:"
+        mensajef db 10,"El mayor es el:",10
         lenf equ $ - mensajef
 
         mensajeI db 10,"Los números son iguales",10
         lenI equ $ - mensajeI
+
+        mensaje23 db 10,"Los números 2 y 3 son iguales",10
+        len23 equ $ - mensaje23
 section .bss
         n1 resb 5
         n2 resb 5
         n3 resb 5
+        num1 resb 5
+        num2 resb 5
+        num3 resb 5
 section .text
         global _start
 _start:
@@ -60,43 +74,50 @@ _start:
 
         leer n3, 5
 ;proceso
-        mov eax,[n1]
-	    mov ebx,[n2]
-	    mov ecx,[n3]
+        mov eax,[n1];2
+        mov [num1], eax
+	    mov ebx,[n2];5
+        mov [num2], ebx
+	    mov ecx,[n3];5
+        mov [num3], ecx
         cmp eax,ebx
-	    jg compare
-        je compare2
-	    jmp compare2
+	    jg compare ; si es mayor
+        je comparei ; igual
+	    jmp compare2 ; es menor
 
 
 compare:
 	cmp eax,ecx
 	jg pmayor
 	jmp tmayor
-	
+    
 compare2:
 	cmp ebx,ecx
-    je igual
 	jg smayor
-	jmp tmayor
+	jmp tmayor 
 
+comparei:
+	cmp ebx,ecx
+    je igual
+    jmp compare2
 igual: 
     escribir mensajeI, lenI
     jmp salir
 
 pmayor:
     escribir mensajef, lenf
-    escribir mensaje2, len2
+    escribirn num1
+
 	jmp salir
 
 smayor:
     escribir mensajef, lenf
-    escribir mensaje3, len3
+    escribirn num2
 	jmp salir
 	
 tmayor:
     escribir mensajef, lenf
-    escribir mensaje4, len4
+    escribirn num3
     jmp salir
 
 salir: 
