@@ -30,3 +30,35 @@ PILAS
 pop  --->obtiene
 push --->guarda
 
+
+ss---> es el que define el inicio de PILAS
+sp---> va a definir el top, se ubica fuera del espacio para el ensamblado
+en push -, pongo un registro, ejemplo push Ax 
+en pop  +, pongo un registro, ejemplo pop Dx
+mov ax, [sp - 4] ---> moviendo el valor, NO el apuntador sp 
+no se puede al inicio de la pila hacer un pop sin haber hecho un push
+
+loop me permite dec automaticamente 
+dec lo estoy forzando a decrementar 
+
++++++++++++++++++diferentes tipos de saltos++++++++++++++++
+
+saltos no condicionales  jmp 
+-saltos a cualquier espacio de memoria
+- a traves de etiquetas
+
+saltos por estados jnnp
+a traves de etiquetas
+
+saltos condicionales
+trabaja con ecx
+cuando ecx = 0 deja de saltar
+cuando ecx =! o saltar
+
+salto largo o subrutina  ---> call
+no altera el flujo normal de eventos
+el call ejecuta la etiqueta y regresa a la siguiente instrucción
+el read permite regresar 
+
+
+
