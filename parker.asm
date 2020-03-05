@@ -15,25 +15,22 @@
 %endmacro
 
 section .data
-    msj_ingreso db 'Ingrese un caracter: ',10
+    msj_ingreso db 'Ingrese un número del 1 al 9:',10
     len_msj_ingreso equ $-msj_ingreso
 
-    msj_res_con db 'Constante',10
-    len_msj_res_con equ $-msj_res_con
-
-    msj_res_voc db 'Vocal',10
-    len_msj_res_voc equ $-msj_res_voc
-
-    msj_res_num db 'Número',10
-    len_msj_res_num equ $-msj_res_num
-
-    msj_res_esp db 'Carácter Especial',10
-    len_msj_res_esp equ $-msj_res_esp
+    msj_binario db 'El binario es:',10
+    len_binario equ $-msj_binario
 
     salto db '',10
 
+    msj_cero db '0',10
+    len_cero equ $-msj_cero
+
+    msj_uno db '1',10
+    len_uno equ $-msj_uno
+
 section .bss
-    caracter resb 2
+    numero resb 2
 
 section .text
     global _start
@@ -42,167 +39,60 @@ _start:
 
 ingreso:
     imprimir msj_ingreso, len_msj_ingreso
-    leer caracter, 2
+    leer numero, 2
 
-    mov bl, [caracter]
-    cmp bl, 47
-    jg comp_n
+    mov al, [numero]
+    sub al, '0'
 
-    jmp es_caracter
+    cmp al, 0
+    je bin_cero
+    jne comparacion
+comparacion: 
+    cmp al, 1
+    je bin_uno
+    cmp al, 2
+    je bin_dos
+    cmp al,3
+    je bin_tres
+    cmp al,4
+    je bin_cuatro
+    cmp al, 5
+    je bin_cinco
+    cmp al, 6
+    je bin_seis
+    cmp al, 7
+    je bin_siete
+    cmp al, 8
+    je bin_ocho
+    cmp al, 9
+    je bin_nueve
 
-comp_n:
-
-    cmp bl,48
-    je es_numero
-    cmp bl,49
-    je es_numero
-    cmp bl,50
-    je es_numero
-    cmp bl,51
-    je es_numero
-    cmp bl,52
-    je es_numero
-    cmp bl,53
-    je es_numero
-    cmp bl,54
-    je es_numero
-    cmp bl,55
-    je es_numero
-    cmp bl,56
-    je es_numero
-    cmp bl,57
-    je es_numero
-    jmp comp_M
-
-comp_M:
-    cmp bl, 65
-    je es_vocal
-    cmp bl, 66
-    je es_consonante
-    cmp bl, 67
-    je es_consonante
-    cmp bl, 68
-    je es_consonante
-    cmp bl, 69
-    je es_vocal
-    cmp bl, 70
-    je es_consonante
-    cmp bl, 71
-    je es_consonante
-    cmp bl, 72
-    je es_consonante
-    cmp bl, 73
-    je es_vocal
-    cmp bl, 74
-    je es_consonante
-    cmp bl, 75
-    je es_consonante
-    cmp bl, 76
-    je es_consonante
-    cmp bl, 77
-    je es_consonante
-    cmp bl, 78
-    je es_consonante
-    cmp bl, 79
-    je es_vocal
-    cmp bl, 80
-    je es_consonante
-    cmp bl, 81
-    je es_consonante
-    cmp bl, 82
-    je es_consonante
-    cmp bl, 83
-    je es_consonante
-    cmp bl, 85
-    je es_consonante
-    cmp bl, 85
-    je es_vocal
-    cmp bl, 86
-    je es_consonante
-    cmp bl, 87
-    je es_consonante
-    cmp bl, 88
-    je es_consonante
-    cmp bl, 89
-    je es_consonante
-    cmp bl, 90
-    je es_consonante
-
-    jmp comp_m
-
-comp_m:
-    cmp bl, 97
-    je es_vocal
-    cmp bl, 98
-    je es_consonante
-    cmp bl, 99
-    je es_consonante
-    cmp bl, 100
-    je es_consonante
-    cmp bl, 101
-    je es_vocal
-    cmp bl, 102
-    je es_consonante
-    cmp bl, 103
-    je es_consonante
-    cmp bl, 104
-    je es_consonante
-    cmp bl, 105
-    je es_vocal
-    cmp bl, 106
-    je es_consonante
-    cmp bl, 107
-    je es_consonante
-    cmp bl, 108
-    je es_consonante
-    cmp bl, 109
-    je es_consonante
-    cmp bl, 110
-    je es_consonante
-    cmp bl, 111
-    je es_vocal
-    cmp bl, 112
-    je es_consonante
-    cmp bl, 113
-    je es_consonante
-    cmp bl, 114
-    je es_consonante
-    cmp bl, 115
-    je es_consonante
-    cmp bl, 116
-    je es_consonante
-    cmp bl, 117
-    je es_vocal
-    cmp bl, 118
-    je es_consonante
-    cmp bl, 119
-    je es_consonante
-    cmp bl, 120
-    je es_consonante
-    cmp bl, 121
-    je es_consonante
-    cmp bl, 122
-    je es_consonante
-
-
-    jne es_caracter
-
-es_numero:
-    imprimir msj_res_num, len_msj_res_num
+bin_cero:
+    imprimir msj_binario, len_binario
+    imprimir msj_cero, len_cero
+    jmp ingreso
+bin_uno:
+    imprimir msj_binario, len_binario
+    imprimir msj_uno, len_uno
+    jmp ingreso
+bin_dos:
+    jmp ingreso
+bin_tres:
+    jmp ingreso
+bin_cuatro:
+    jmp ingreso
+bin_cinco:
+    jmp ingreso
+bin_seis:
+    jmp ingreso
+bin_siete:
+    jmp ingreso
+bin_ocho:
+    jmp ingreso
+bin_nueve:
     jmp ingreso
 
-es_caracter:
-    imprimir msj_res_esp, len_msj_res_esp
-    jmp ingreso
 
-es_consonante:
-    imprimir msj_res_con, len_msj_res_con
-    jmp ingreso
-
-es_vocal:
-    imprimir msj_res_voc, len_msj_res_voc
-    jmp ingreso
-
-salida:
+salir:
     mov eax, 1
     int 80h
