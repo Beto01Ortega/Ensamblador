@@ -7,7 +7,9 @@
 %endmacro
 
 section .data
-     path db "/home/beto/Escritorio/carpeta", 0
+        msj_ingreso db 'Ingrese lo que va a ir en el txt:',10
+        len_msj_ingreso equ $-msj_ingreso
+        path db "/home/beto/Escritorio/carpeta", 0
     	archivo db "/home/beto/Escritorio/carpeta/codigo.txt", 0
         mensaje_error db "error en el archivo",10
         len_error equ $ -mensaje_error
@@ -25,7 +27,10 @@ _start:
     mov ecx, 0x1FF
     int 80h 
 
-     mov eax, 3
+
+    escribir msj_ingreso, len_msj_ingreso
+
+    mov eax, 3
     mov ebx, 2
     mov ecx, texto
     mov edx, 35
